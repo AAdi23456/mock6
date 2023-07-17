@@ -19,7 +19,7 @@ router.get('/show/:id', async (req, res) => {
     try {
       const { email, score, quizId } = req.body;
   
-    console.log(quizId)
+   
       const leaderboardEntry = new leaderboardmpodel({
         email: email,
         score: score,
@@ -27,6 +27,7 @@ router.get('/show/:id', async (req, res) => {
       });
   
       const savedEntry = await leaderboardEntry.save();
+      console.log(savedEntry)
       res.status(201).json(savedEntry);
 
     } catch (error) {
