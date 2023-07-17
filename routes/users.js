@@ -11,7 +11,7 @@ usersRoute.post("/signup", async (req, res) => {
       if(userr){
         return  res.status(200).json({ email: userr.email})
       }
-        const datatodb = new reg_model({ username, email })
+        const datatodb = new users({ username, email })
         await datatodb.save()
         return  res.status(200).json({    email: userr.email})
     } catch (error) {
