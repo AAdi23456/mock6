@@ -31,4 +31,13 @@ quizroutes.post('/quiz', async (req, res) => {
     }
     
   })
+  quizroutes.get("/quize/:id",async(req,res)=>{
+    try {
+        const data=await quizmodel.findById(id)
+    return res.status(200).json(data.questions)
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+    
+  })
   module.exports=quizroutes
