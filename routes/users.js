@@ -5,9 +5,10 @@ const jwt=require("jsonwebtoken")
 
 usersRoute.post("/signup", async (req, res) => {
     const { username, email } = req.body
+    console.log(req.body);
     try {
       const userr=await users.findOne({email,username})
-      console.log(userr);
+      //console.log(userr);
       if(userr){
         return  res.status(200).json({ email: userr.email})
       }

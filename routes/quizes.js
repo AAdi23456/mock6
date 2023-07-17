@@ -42,4 +42,37 @@ quizroutes.post('/quiz', async (req, res) => {
     }
     
   })
+  quizroutes.delete('/quiz/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const deletedQuiz = await quizmodel.findByIdAndDelete(id);
+      if (!deletedQuiz) {
+        return res.status(404).json({ error: 'Quiz not found' });
+      }
+      return res.status(200).json({ msg: 'Quiz deleted successfully' });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  quizroutes.put('/quiz/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, description } = req.body;
+      const updatedQuiz = await quizmodel.findByIdAndUpdate(
+        id,
+        { title, description },
+        { new: true }
+      );
+      if (!updatedQuiz) {
+        return res.status(404).json({ error: 'Quiz not found' });
+      }
+      return res.status(200).json({ msg: 'Quiz updated successfully' });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
   module.exports=quizroutes
